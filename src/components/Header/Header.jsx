@@ -2,7 +2,6 @@ import { gsap } from "gsap";
 import { useEffect } from "react";
 import { useRef } from "react";
 import CSSPlugin from "gsap/CSSPlugin";
-import { useSelector } from "react-redux";
 import { Corsine } from "../Addons/Corsine";
 
 gsap.registerPlugin(CSSPlugin);
@@ -41,8 +40,6 @@ export const Header = () => {
       }
     );
   }
-
-  const corsine = useSelector((state) => state.corsine.corsine);
 
   useEffect(() => {
     animatedMe();

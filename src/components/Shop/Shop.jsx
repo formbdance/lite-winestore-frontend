@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCountry } from "@filteredSlice";
-import { addItem, removeItem } from "@localcorsine";
+import { addItem } from "@localcorsine";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { Corsine } from "../Addons/Corsine";
@@ -47,10 +47,6 @@ export const Shop = (props) => {
 
   const corsineAdder = (items) => {
     dispatch(addItem(items));
-  };
-
-  const corsineRemove = (id) => {
-    dispatch(removeItem(id));
   };
 
   useEffect(() => {

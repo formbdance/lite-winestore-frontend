@@ -34,26 +34,26 @@ export const Admin = () => {
 
   const handleChecker = (e) => {
     e.preventDefault();
-    if (formData.named == "") {
+    if (formData.named === "") {
       alert("Название не может быть пустым");
       return;
-    } else if (formData.country == "") {
+    } else if (formData.country === "") {
       alert("Название страны не может быть пустым");
       return;
-    } else if (formData.type == "") {
+    } else if (formData.type === "") {
       alert("Поле тип не может быть пустым");
       return;
     } else if (
-      formData.alcohol == "" ||
+      formData.alcohol === "" ||
       Number.isNaN(Number(formData.alcohol))
     ) {
       alert("Поле алкоголь не может быть пустым или иметь буквенные значения");
       return;
-    } else if (formData.litre == "" || Number.isNaN(Number(formData.litre))) {
+    } else if (formData.litre === "" || Number.isNaN(Number(formData.litre))) {
       alert("Поле литраж не может быть пустым или иметь буквенные значения");
       return;
     } else if (
-      formData.purchases == "" ||
+      formData.purchases === "" ||
       !Number.isInteger(Number(formData.purchases))
     ) {
       alert(

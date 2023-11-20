@@ -27,6 +27,7 @@ export const Order = () => {
                 >
                   <img
                     src={require("./img/card.png")}
+                    alt="noneimg"
                     className="w-12 md:w-16 lg:w-20"
                   />
                   <div>
