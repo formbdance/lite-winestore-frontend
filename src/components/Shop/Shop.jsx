@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCountry } from "@filteredSlice";
+import { addItem, removeItem } from "@localcorsine";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
+import { Corsine } from "../Addons/Corsine";
 
 export const Shop = (props) => {
   function animatedMe() {
@@ -41,7 +43,15 @@ export const Shop = (props) => {
   const targetMarket = props.marketName;
 
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.filtereditems.list);
+  const shopitems = useSelector((state) => state.filtereditems.list);
+
+  const corsineAdder = (items) => {
+    dispatch(addItem(items));
+  };
+
+  const corsineRemove = (id) => {
+    dispatch(removeItem(id));
+  };
 
   useEffect(() => {
     dispatch(fetchCountry(targetMarket));
@@ -73,20 +83,7 @@ export const Shop = (props) => {
               </p>
               <div className="mb-4 mt-4">
                 <div className="flex justify-center">
-                  <div className="flex flex-col items-center gap-2 justify-center cursor-pointer hover:scale-105 transition-all">
-                    <img
-                      src={require("./img/corsine.png")}
-                      alt="no-img"
-                      className="w-12"
-                    />
-                    <p className="text-sm flex gap-2">
-                      0
-                      <span className="text-yellow-500 text-xs">
-                        bottles <br />
-                        of wine
-                      </span>
-                    </p>
-                  </div>
+                  <Corsine />
                 </div>
               </div>
               <Link
@@ -100,9 +97,9 @@ export const Shop = (props) => {
         </div>
         <div className="mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 place-items-center p-4 sm:p-2">
-            {Array.isArray(items) && items.length > 0 ? (
-              items.map((i) => (
-                <div className="md:w-3/4">
+            {Array.isArray(shopitems) && shopitems.length > 0 ? (
+              shopitems.map((i) => (
+                <div className="w-2/4 md:w-3/4" key={i._id}>
                   <img
                     src={require("./img/card.png")}
                     alt=""
@@ -120,7 +117,10 @@ export const Shop = (props) => {
                     </div>
                     <div className="text-sm md:text-md mt-3 flex justify-center w-full px-2 gap-4 items-center">
                       <p className=" text-white">{i.purchases} P</p>
-                      <button className="text-white border border-white hover:text-gray-200 hover:bg-gray-100 hover:border-gray-50 hover:bg-opacity-20 px-3 py-1 rounded">
+                      <button
+                        onClick={() => corsineAdder(i)}
+                        className="text-white border border-white hover:text-gray-200 hover:bg-gray-100 hover:border-gray-50 hover:bg-opacity-20 px-3 py-1 rounded"
+                      >
                         Buy
                       </button>
                     </div>

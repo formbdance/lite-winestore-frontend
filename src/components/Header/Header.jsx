@@ -2,6 +2,8 @@ import { gsap } from "gsap";
 import { useEffect } from "react";
 import { useRef } from "react";
 import CSSPlugin from "gsap/CSSPlugin";
+import { useSelector } from "react-redux";
+import { Corsine } from "../Addons/Corsine";
 
 gsap.registerPlugin(CSSPlugin);
 
@@ -40,13 +42,15 @@ export const Header = () => {
     );
   }
 
+  const corsine = useSelector((state) => state.corsine.corsine);
+
   useEffect(() => {
     animatedMe();
   }, []);
 
   return (
     <section className="font-Catallina uppercase">
-      <div className="container mx-auto flex px-4 xl:px-40 py-24 md:flex-row flex-col items-center ">
+      <div className="container mx-auto flex px-4 xl:px-40 py-24 md:flex-row flex-col items-center">
         <div
           id="lefthead"
           ref={blockRefs.lefthead}
@@ -83,6 +87,9 @@ export const Header = () => {
 
           <div className="flex justify-center text-gray-500 text-xs">
             <p>Wine of story</p>
+          </div>
+          <div className="mt-4 flex flex-col items-center gap-2 justify-center cursor-pointer hover:scale-105 transition-all">
+            <Corsine />
           </div>
         </div>
       </div>
