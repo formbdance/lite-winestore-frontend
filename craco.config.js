@@ -8,7 +8,8 @@ module.exports = {
         alias: {
             '@store': resolvePath('./src/store.js'),
             '@productslice': resolvePath('./src/features/items/productSlice.js'),
-            '@filteredSlice': resolvePath('./src/features/items/filteredSlice.js')
+            '@filteredSlice': resolvePath('./src/features/items/filteredSlice.js'),
+            '@localcorsine': resolvePath('./src/features/localstore/localstore.js')
         }
     },
   // ...

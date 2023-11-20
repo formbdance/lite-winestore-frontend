@@ -29,6 +29,40 @@ export const Admin = () => {
   const handleAddItem = () => {
     dispatch(addItem(formData));
     clearFormActivity();
+    window.location.reload();
+  };
+
+  const handleChecker = (e) => {
+    e.preventDefault();
+    if (formData.named == "") {
+      alert("Название не может быть пустым");
+      return;
+    } else if (formData.country == "") {
+      alert("Название страны не может быть пустым");
+      return;
+    } else if (formData.type == "") {
+      alert("Поле тип не может быть пустым");
+      return;
+    } else if (
+      formData.alcohol == "" ||
+      Number.isNaN(Number(formData.alcohol))
+    ) {
+      alert("Поле алкоголь не может быть пустым или иметь буквенные значения");
+      return;
+    } else if (formData.litre == "" || Number.isNaN(Number(formData.litre))) {
+      alert("Поле литраж не может быть пустым или иметь буквенные значения");
+      return;
+    } else if (
+      formData.purchases == "" ||
+      !Number.isInteger(Number(formData.purchases))
+    ) {
+      alert(
+        "Поле цена не может быть пустым или иметь буквенные значения/спец. символы"
+      );
+      return;
+    }
+
+    handleAddItem();
   };
 
   useEffect(() => {
@@ -40,12 +74,13 @@ export const Admin = () => {
         <h1 className="text-green-600 text-center text-4xl font-semibold my-6">
           Admin panel
         </h1>
-        <form onSubmit={handleAddItem}>
+        <form onSubmit={handleChecker}>
           <div className="flex flex-col gap-3 text-center text-lg ">
             <input
               onChange={(e) =>
                 setFormData({ ...formData, named: e.target.value })
               }
+              value={formData.named}
               className="outline-none rounded p-1"
               placeholder="Wine name (Story of Italy)"
               type="text"
@@ -54,6 +89,7 @@ export const Admin = () => {
               onChange={(e) =>
                 setFormData({ ...formData, country: e.target.value })
               }
+              value={formData.country}
               name=""
               className="outline-none rounded p-1"
             >
@@ -66,6 +102,7 @@ export const Admin = () => {
               onChange={(e) =>
                 setFormData({ ...formData, type: e.target.value })
               }
+              value={formData.type}
               name=""
               className="outline-none rounded p-1"
             >
@@ -77,16 +114,18 @@ export const Admin = () => {
             <div className="flex gap-4">
               <input
                 onChange={(e) =>
-                  setFormData({ ...formData, alcohol: Number(e.target.value) })
+                  setFormData({ ...formData, alcohol: e.target.value })
                 }
+                value={formData.alcohol}
                 className="outline-none rounded p-1"
                 placeholder="Alcohol (12)"
                 type="text"
               />
               <input
                 onChange={(e) =>
-                  setFormData({ ...formData, litre: Number(e.target.value) })
+                  setFormData({ ...formData, litre: e.target.value })
                 }
+                value={formData.litre}
                 className="outline-none rounded p-1"
                 placeholder="Litre (0.75)"
                 type="text"
@@ -95,9 +134,10 @@ export const Admin = () => {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    purchases: Number(e.target.value),
+                    purchases: e.target.value,
                   })
                 }
+                value={formData.purchases}
                 className="outline-none rounded p-1"
                 placeholder="Price (3212)"
                 type="text"
